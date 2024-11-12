@@ -1,6 +1,6 @@
 import { Link, NavLink } from "react-router-dom";
 
-import MobileNavbar from "./MobileNavbar";
+import MobileMenu from "./MobileMenu";
 import { assets } from "../assets/frontend_assets/assets";
 import { useState } from "react";
 
@@ -9,41 +9,49 @@ function Navbar() {
   const [visibleMenu, setVisibleMenu] = useState(false);
 
   return (
-    <div className="flex items-center justify-between py-5 font-medium">
+    <section
+      title="Navigation Bar"
+      className="flex items-center justify-between py-5 font-medium"
+    >
       {/* Logo */}
       <Link to="/">
         <img src={assets.logo} alt="Logo" className="w-36" />
       </Link>
 
       {/* Navigation Menu => By Default hidden, Visible on screens width >= 640px(SM) */}
-      <ul className="hidden sm:flex gap-5 text-sm text-gray-700">
-        <NavLink to="/" className="flex flex-col gap-1 items-center uppercase ">
-          <p>Home</p>
-          {/* Only active link should have horizontal line below it. Check app.css for styling of active link */}
-          <hr className="w-2/4 border-none h-[1.5px] bg-gray-700 hidden" />
-        </NavLink>
-        <NavLink
-          to="/collections"
-          className="flex flex-col gap-1 items-center uppercase "
-        >
-          <p>Collections</p>
-          <hr className="w-2/4 border-none h-[1.5px] bg-gray-700 hidden" />
-        </NavLink>
-        <NavLink
-          to="/about"
-          className="flex flex-col gap-1 items-center uppercase "
-        >
-          <p>About</p>
-          <hr className="w-2/4 border-none h-[1.5px] bg-gray-700 hidden" />
-        </NavLink>
-        <NavLink
-          to="/contact"
-          className="flex flex-col gap-1 items-center uppercase "
-        >
-          <p>Contact</p>
-          <hr className="w-1/2 border-none h-[1.5px] bg-gray-700 hidden" />
-        </NavLink>
-      </ul>
+      <nav>
+        <ul className="hidden sm:flex gap-5 text-sm text-gray-700">
+          <NavLink
+            to="/"
+            className="flex flex-col gap-1 items-center uppercase "
+          >
+            <p>Home</p>
+            {/* Only active link should have horizontal line below it. Check app.css for styling of active link */}
+            <hr className="w-2/4 border-none h-[1.5px] bg-gray-700 hidden" />
+          </NavLink>
+          <NavLink
+            to="/collections"
+            className="flex flex-col gap-1 items-center uppercase "
+          >
+            <p>Collections</p>
+            <hr className="w-2/4 border-none h-[1.5px] bg-gray-700 hidden" />
+          </NavLink>
+          <NavLink
+            to="/about"
+            className="flex flex-col gap-1 items-center uppercase "
+          >
+            <p>About</p>
+            <hr className="w-2/4 border-none h-[1.5px] bg-gray-700 hidden" />
+          </NavLink>
+          <NavLink
+            to="/contact"
+            className="flex flex-col gap-1 items-center uppercase "
+          >
+            <p>Contact</p>
+            <hr className="w-1/2 border-none h-[1.5px] bg-gray-700 hidden" />
+          </NavLink>
+        </ul>
+      </nav>
       {/*  */}
 
       {/*Search Profile Cart and mobile Menu icons */}
@@ -94,13 +102,13 @@ function Navbar() {
           role="button"
           onClick={() => setVisibleMenu(!visibleMenu)}
         />
-        <MobileNavbar
+        <MobileMenu
           dropdown_icon={assets.dropdown_icon}
           setVisibleMenu={setVisibleMenu}
           visibleMenu={visibleMenu}
         />
       </div>
-    </div>
+    </section>
   );
 }
 
