@@ -4,6 +4,7 @@ import About from "./pages/About";
 import Cart from "./pages/Cart";
 import Collections from "./pages/Collections";
 import Contact from "./pages/Contact";
+import Footer from "./components/Footer";
 import Home from "./pages/Home";
 import Login from "./pages/Login";
 import Navbar from "./components/Navbar";
@@ -28,6 +29,7 @@ function App() {
         <Route path="/product/:productId" element={<Product />} />
         <Route path="*" element={<PageNotFound />} />
       </Routes>
+      <Footer />
     </div>
   );
 }
