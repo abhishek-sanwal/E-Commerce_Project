@@ -1,5 +1,6 @@
 import { Link, NavLink } from "react-router-dom";
 
+import MobileNavbar from "./MobileNavbar";
 import { assets } from "../assets/frontend_assets/assets";
 import { useState } from "react";
 
@@ -10,7 +11,9 @@ function Navbar() {
   return (
     <div className="flex items-center justify-between py-5 font-medium">
       {/* Logo */}
-      <img src={assets.logo} alt="Logo" className="w-36" />
+      <Link to="/">
+        <img src={assets.logo} alt="Logo" className="w-36" />
+      </Link>
 
       {/* Navigation Menu => By Default hidden, Visible on screens width >= 640px(SM) */}
       <ul className="hidden sm:flex gap-5 text-sm text-gray-700">
@@ -91,59 +94,11 @@ function Navbar() {
           role="button"
           onClick={() => setVisibleMenu(!visibleMenu)}
         />
-      </div>
-      {/* Navigation menu for smaller screens <= 640px */}
-      <div
-        className={`absolute top-0 right-0 bottom-0 overflow-hidden bg-white transition-all ${
-          visibleMenu ? "w-full" : "w-0"
-        }`}
-      >
-        <div className="flex flex-col text-gray-600 ">
-          <div
-            className="flex items-center gap-4 p-3  transition-opacity"
-            onClick={() => setVisibleMenu(false)}
-            role="button"
-          >
-            <img
-              src={assets.dropdown_icon}
-              alt="DropDown Menu"
-              className="h-4 rotate-180 "
-            />
-            <p>Back</p>
-          </div>
-          <NavLink
-            role="button"
-            onClick={() => setVisibleMenu(false)}
-            className="mt-2 py-4 pl-8 border-bottom hover:bg-gray-300  "
-            to="/Home"
-          >
-            Home
-          </NavLink>
-          <NavLink
-            role="button"
-            onClick={() => setVisibleMenu(false)}
-            className="py-4 pl-8 border hover:bg-gray-300 "
-            to="/collections"
-          >
-            Collections
-          </NavLink>
-          <NavLink
-            role="button"
-            onClick={() => setVisibleMenu(false)}
-            className="py-4 pl-8 border hover:bg-gray-300 "
-            to="/about"
-          >
-            About
-          </NavLink>
-          <NavLink
-            role="button"
-            onClick={() => setVisibleMenu(false)}
-            className="py-4 pl-8 border  hover:bg-gray-300"
-            to="/contact"
-          >
-            Contact
-          </NavLink>
-        </div>
+        <MobileNavbar
+          dropdown_icon={assets.dropdown_icon}
+          setVisibleMenu={setVisibleMenu}
+          visibleMenu={visibleMenu}
+        />
       </div>
     </div>
   );
