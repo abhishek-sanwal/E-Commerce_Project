@@ -80,7 +80,7 @@ function Navbar() {
         <Link to="/cart" className="relative">
           <img className="w-5 min-w-5" src={assets.cart_icon} alt="Cart" />
           <p className="absolute right-[-5px] bottom-[-5px] w-4 text-center leading-4 bg-black text-white aspect-square rounded-full text-[8px]">
-            10
+            0
           </p>
         </Link>
         {/* Menu icon only visible for width <= 640px */}
