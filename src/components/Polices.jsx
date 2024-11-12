@@ -2,7 +2,7 @@ import { assets } from "../assets/frontend_assets/assets";
 
 function Polices() {
   return (
-    <div className="text-center text-xs sm:text-sm md:text-base text-gray-700 py-20">
+    <section className="text-center text-xs sm:text-sm md:text-base text-gray-700 py-20">
       <div className="flex flex-col sm:flex-row justify-around gap-12 sm:gap-2 ">
         {/* Exchange */}
         <div>
@@ -37,7 +37,7 @@ function Polices() {
           <p className="text-gray-400">We provide 24x7 customer support</p>
         </div>
       </div>
-    </div>
+    </section>
   );
 }
 
