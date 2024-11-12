@@ -1,6 +1,7 @@
 import BestSeller from "../components/BestSeller";
 import Hero from "../components/Hero";
 import LatestCollections from "../components/LatestCollections";
+import Polices from "../components/Polices";
 
 function Home() {
   return (
@@ -8,6 +9,7 @@ function Home() {
       <Hero />
       <LatestCollections />
       <BestSeller />
+      <Polices />
     </div>
   );
 }
