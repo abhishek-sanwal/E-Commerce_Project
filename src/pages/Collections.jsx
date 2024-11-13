@@ -6,7 +6,7 @@ import { assets } from "../assets/frontend_assets/assets";
 import { useShopContext } from "../contexts/ShopContextProvider";
 
 function Collections() {
-  const { products } = useShopContext();
+  const { products, showSearch, search } = useShopContext();
 
   const [showFilter, setShowFilter] = useState(false);
   const [filterProducts, setFilterProducts] = useState([]);
@@ -61,11 +61,18 @@ function Collections() {
           break;
       }
     },
-    [sortBy, filterProducts]
+    [sortBy]
   );
 
   function applyFilter() {
     let newFilterProducts = products.slice();
+
+    if (showSearch && search.length > 0) {
+      newFilterProducts = newFilterProducts.filter((product) =>
+        product.name.toLowerCase().includes(search.toLowerCase())
+      );
+    }
+
     if (categories.length > 0) {
       newFilterProducts = newFilterProducts.filter((product) =>
         categories.includes(product.category)
@@ -83,7 +90,7 @@ function Collections() {
     function () {
       applyFilter();
     },
-    [categories, subCategories]
+    [categories, subCategories, search, showSearch]
   );
 
   return (
@@ -195,6 +202,12 @@ function Collections() {
         </div>
 
         <div className="grid grid-cols-2 md:grid-cols-2 lg:grid-cols-4 gap-4 gap-y-6">
+          {filterProducts.length === 0 && (
+            <img
+              src={assets.no_products_found}
+              className="col-span-full row-span-full"
+            />
+          )}
           {filterProducts.map((item, index) => (
             <ProductItem
               key={index}
