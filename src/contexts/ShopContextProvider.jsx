@@ -1,4 +1,4 @@
-import { createContext, useContext } from "react";
+import { createContext, useContext, useState } from "react";
 
 import PropTypes from "prop-types";
 import { products } from "../assets/frontend_assets/assets";
@@ -9,12 +9,18 @@ function ShopContextProvider({ children }) {
   const currency = "$";
   const deliveryFee = "10";
 
+  const [search, setSearch] = useState("");
+  const [showSearch, setShowSearch] = useState(false);
   return (
     <shopContext.Provider
       value={{
         products,
         deliveryFee,
         currency,
+        search,
+        setSearch,
+        showSearch,
+        setShowSearch,
       }}
     >
       {children}
