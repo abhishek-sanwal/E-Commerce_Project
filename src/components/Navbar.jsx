@@ -1,13 +1,28 @@
-import { Link, NavLink } from "react-router-dom";
+import { Link, NavLink, useLocation } from "react-router-dom";
+import { useEffect, useState } from "react";
 
 import MobileMenu from "./MobileMenu";
 import { assets } from "../assets/frontend_assets/assets";
-import { useState } from "react";
+import { useShopContext } from "../contexts/ShopContextProvider";
 
 // 1 means 4px
 function Navbar() {
   const [visibleMenu, setVisibleMenu] = useState(false);
+  const { showSearch, setShowSearch } = useShopContext();
+  const [visible, setVisible] = useState(false);
 
+  const location = useLocation();
+
+  useEffect(
+    function () {
+      console.log(location.pathname);
+      if (location.pathname.includes("collections")) {
+        setVisible(true);
+      } else setVisible(false);
+    },
+    [location]
+  );
+  console.log(visible);
   return (
     <section
       title="Navigation Bar"
@@ -61,6 +76,7 @@ function Navbar() {
           className="w-5"
           src={assets.search_icon}
           alt="Search"
+          onClick={() => visible && setShowSearch(!showSearch)}
         />
 
         {/* Profile with dropdown options below it. */}
