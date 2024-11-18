@@ -1,4 +1,4 @@
-import { createContext, useContext, useState } from "react";
+import { createContext, useContext, useEffect, useState } from "react";
 
 import PropTypes from "prop-types";
 import { products } from "../assets/frontend_assets/assets";
@@ -11,11 +11,13 @@ function ShopContextProvider({ children }) {
 
   const [search, setSearch] = useState("");
   const [showSearch, setShowSearch] = useState(false);
-  const [cartProducts, setCartProducts] = useState({});
+  const [cartItems, setCartItems] = useState({});
+  const [totalCartItems, setTotalCartItems] = useState(0);
 
+  //  Add product to cart
   async function addToCart(productId, size) {
     // Deep Clone
-    const newCartProducts = structuredClone(cartProducts);
+    let newCartProducts = structuredClone(cartItems);
 
     // Don't use dot notation as we have to use variables so use bracket notation.
     // Set product id if it doesn't exist
@@ -25,10 +27,44 @@ function ShopContextProvider({ children }) {
     newCartProducts[productId][size] =
       (newCartProducts[productId]?.[size] ?? 0) + 1;
 
-    setCartProducts(newCartProducts);
+    setCartItems(newCartProducts);
   }
 
-  console.log(cartProducts);
+  // Count total products in cart.
+
+  // cartItems{
+  //   "aaa":{
+  //     M:1,
+  //     L:1,
+  //     S:1,
+  //   },
+  //   "aaavv:{
+  //     M:2,
+  //     L:3,
+  //     S:1,
+  //   };
+
+  // }
+  async function countTotalProductsInCart() {
+    // Fetch Keys/properties from object
+    const value = Object.keys(cartItems).reduce(
+      (acc, key) =>
+        acc +
+        // sum of all object values
+        Object.values(cartItems[key]).reduce((total, val) => val + total, 0),
+      0
+    );
+
+    setTotalCartItems(value);
+  }
+
+  useEffect(
+    function () {
+      countTotalProductsInCart();
+    },
+    [cartItems]
+  );
+
   return (
     <shopContext.Provider
       value={{
@@ -39,8 +75,9 @@ function ShopContextProvider({ children }) {
         setSearch,
         showSearch,
         setShowSearch,
-        cartProducts,
+        cartItems,
         addToCart,
+        totalCartItems,
       }}
     >
       {children}
