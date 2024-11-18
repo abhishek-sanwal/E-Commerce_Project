@@ -4,7 +4,7 @@ import ProductItem from "./ProductItem";
 import Title from "./Title";
 import { useShopContext } from "../contexts/ShopContextProvider";
 
-const BestSeller = () => {
+function BestSeller() {
   const { products } = useShopContext();
   const [bestSeller, setBestSeller] = useState([]);
 
@@ -38,6 +38,6 @@ const BestSeller = () => {
       </main>
     </section>
   );
-};
+}
 
 export default BestSeller;
