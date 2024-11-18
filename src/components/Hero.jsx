@@ -26,7 +26,11 @@ export default function Hero() {
 
       {/* Hero Right Side */}
 
-      <img src={assets.hero_img} alt="" className="w-full sm:w-1/2" />
+      <img
+        src={assets.hero_img}
+        alt="A fashion women pic"
+        className="w-full sm:w-1/2"
+      />
     </section>
   );
 }

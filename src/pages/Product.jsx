@@ -17,7 +17,7 @@ const Product = () => {
       if (product._id === productId) {
         setProductsData(product);
         setImage(product.image[0]);
-
+        setSize("");
         return null;
       }
     });
