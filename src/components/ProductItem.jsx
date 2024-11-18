@@ -9,7 +9,7 @@ function ProductItem({ id, image, name, price }) {
       <header className="overflow-hidden border rounded-lg p-4 shadow-sm  h-[300px]">
         <img
           src={image[0]}
-          alt=""
+          alt="front Product Image"
           className="w-full h-48 object-cover mb-2 rounded hover:scale-110 transition ease-in-out duration-500 "
         />
         <p className="pt-3 pb-1 text-sm ">{name}</p>
