@@ -2,6 +2,7 @@ import { createContext, useContext, useEffect, useState } from "react";
 
 import PropTypes from "prop-types";
 import { products } from "../assets/frontend_assets/assets";
+import { toast } from "react-toastify";
 
 const shopContext = createContext();
 
@@ -16,6 +17,10 @@ function ShopContextProvider({ children }) {
 
   //  Add product to cart
   async function addToCart(productId, size) {
+    if (!size) {
+      toast.error("Select a product Size");
+      return;
+    }
     // Deep Clone
     let newCartProducts = structuredClone(cartItems);
 
@@ -28,6 +33,7 @@ function ShopContextProvider({ children }) {
       (newCartProducts[productId]?.[size] ?? 0) + 1;
 
     setCartItems(newCartProducts);
+    toast.success("Added to cart");
   }
 
   // Count total products in cart.
@@ -43,7 +49,7 @@ function ShopContextProvider({ children }) {
   //     L:3,
   //     S:1,
   //   };
-
+  // 1+1+1+2+3+1
   // }
   async function countTotalProductsInCart() {
     // Fetch Keys/properties from object
@@ -65,6 +71,7 @@ function ShopContextProvider({ children }) {
     [cartItems]
   );
 
+  console.log(totalCartItems, cartItems);
   return (
     <shopContext.Provider
       value={{

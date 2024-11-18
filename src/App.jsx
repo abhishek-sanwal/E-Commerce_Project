@@ -1,3 +1,5 @@
+import "react-toastify/dist/ReactToastify.css";
+
 import { Route, Routes } from "react-router-dom";
 
 import About from "./pages/About";
@@ -13,10 +15,12 @@ import PageNotFound from "./pages/PageNotFound";
 import PlaceOrder from "./pages/PlaceOrder";
 import Product from "./pages/Product";
 import SearchBar from "./components/SearchBar";
+import { ToastContainer } from "react-toastify";
 
 function App() {
   return (
     <div className="px-4 sm:px-[5vw] md:px-[7vw] lg:px-[9vw] ">
+      <ToastContainer />
       <Navbar />
       <SearchBar />
       <Routes>
