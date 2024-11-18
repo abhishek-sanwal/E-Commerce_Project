@@ -15,14 +15,12 @@ function Navbar() {
 
   useEffect(
     function () {
-      console.log(location.pathname);
       if (location.pathname.includes("collections")) {
         setVisible(true);
       } else setVisible(false);
     },
     [location]
   );
-  console.log(visible);
   return (
     <section
       title="Navigation Bar"
