@@ -1,6 +1,6 @@
 import { useState } from "react";
 
-const Login = () => {
+function Login() {
   const [currentState, setCurrentState] = useState("Sign Up");
 
   return (
@@ -65,6 +65,6 @@ const Login = () => {
       </div>
     </form>
   );
-};
+}
 
 export default Login;
