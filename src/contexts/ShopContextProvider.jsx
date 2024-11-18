@@ -11,6 +11,24 @@ function ShopContextProvider({ children }) {
 
   const [search, setSearch] = useState("");
   const [showSearch, setShowSearch] = useState(false);
+  const [cartProducts, setCartProducts] = useState({});
+
+  async function addToCart(productId, size) {
+    // Deep Clone
+    const newCartProducts = structuredClone(cartProducts);
+
+    // Don't use dot notation as we have to use variables so use bracket notation.
+    // Set product id if it doesn't exist
+    newCartProducts[productId] = newCartProducts?.[productId] ?? {};
+
+    // Increase Product Size_count by 1.
+    newCartProducts[productId][size] =
+      (newCartProducts[productId]?.[size] ?? 0) + 1;
+
+    setCartProducts(newCartProducts);
+  }
+
+  console.log(cartProducts);
   return (
     <shopContext.Provider
       value={{
@@ -21,6 +39,8 @@ function ShopContextProvider({ children }) {
         setSearch,
         showSearch,
         setShowSearch,
+        cartProducts,
+        addToCart,
       }}
     >
       {children}
