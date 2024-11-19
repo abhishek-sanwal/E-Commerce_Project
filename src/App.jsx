@@ -10,7 +10,7 @@ import Footer from "./components/Footer";
 import Home from "./pages/Home";
 import Login from "./pages/Login";
 import Navbar from "./components/Navbar";
-import Orders from "./pages/Login";
+import Orders from "./pages/Orders";
 import PageNotFound from "./pages/PageNotFound";
 import PlaceOrder from "./pages/PlaceOrder";
 import Product from "./pages/Product";
