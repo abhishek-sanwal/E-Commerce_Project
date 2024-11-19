@@ -1,15 +1,21 @@
-import { useEffect, useState } from "react";
-
 import CartTotal from "../components/CartTotal";
 import Title from "../components/Title";
 import { assets } from "../assets/frontend_assets/assets";
+import { useEffect } from "react";
 import { useShopContext } from "../contexts/ShopContextProvider";
 
 function Cart() {
-  const { products, currency, cartItems, navigate, updateQuantity, addOrder } =
-    useShopContext();
+  const {
+    products,
+    currency,
+    cartItems,
+    navigate,
+    updateQuantity,
+    addOrder,
+    cartData,
+    setCartData,
+  } = useShopContext();
 
-  const [cartData, setCartData] = useState([]);
   // Convert cartItems{
   //   "aaa":{
   //     M:1,
