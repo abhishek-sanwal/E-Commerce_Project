@@ -16,7 +16,7 @@ function ShopContextProvider({ children }) {
   // total quantity of all cart products
   const [totalCartItems, setTotalCartItems] = useState(0);
 
-  const [orders, setOrders] = useState();
+  const [orders, setOrders] = useState([]);
   const navigate = useNavigate();
   const [cartData, setCartData] = useState([]);
   const [loggedIn, setLoggedIn] = useState(true);
@@ -71,8 +71,8 @@ function ShopContextProvider({ children }) {
   }
 
   function toggleLoggedStatus() {
-    setLoggedIn(!loggedIn);
-    if (!loggedIn) navigate("/login");
+    if (loggedIn) setLoggedIn(false);
+    else navigate("/login");
   }
 
   useEffect(
@@ -140,6 +140,7 @@ function ShopContextProvider({ children }) {
         setCartData,
         toggleLoggedStatus,
         loggedIn,
+        setLoggedIn,
       }}
     >
       {children}
