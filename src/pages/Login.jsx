@@ -1,8 +1,61 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
+
+import { useShopContext } from "../contexts/ShopContextProvider";
 
 function Login() {
   const [currentState, setCurrentState] = useState("Sign Up");
 
+  const { loggedIn, navigate } = useShopContext();
+  const [remainingTime, setRemainingTime] = useState(5);
+
+  console.log(loggedIn);
+  useEffect(
+    function () {
+      async function getRemainingTime() {
+        if (loggedIn) {
+          if (remainingTime === 0) {
+            navigate("/");
+          }
+          const timer = setInterval(
+            () => setRemainingTime(remainingTime - 1),
+            1000
+          );
+          return () => clearInterval(timer);
+        }
+      }
+      getRemainingTime();
+    },
+    [remainingTime]
+  );
+
+  function onButtonClick() {
+    if (currentState == "Sign Up") {
+      setCurrentState("Login");
+    } else {
+      navigate("/");
+    }
+  }
+
+  if (loggedIn) {
+    return (
+      <section>
+        <div className="flex flex-col items-center gap-6  w-full h-[80%] justify-center mt-14 ">
+          <h3 className="font-semibold text-xl ">
+            You are logged in. You will be redirected to Home page in
+            {" " + remainingTime} seconds.
+          </h3>
+          <button
+            onClick={() => navigate("/")}
+            className="bg-gray-100 py-4 px-2 hover:bg-gray-200"
+          >
+            Navigate to HomPage
+          </button>
+        </div>
+      </section>
+    );
+  }
+
+  console.log(loggedIn);
   return (
     <form
       onSubmit={(e) => e.preventDefault()}
@@ -59,7 +112,10 @@ function Login() {
             </p>
           )}
         </div>
-        <button className="w-1/2 m-auto bg-black text-white px-8 py-2 mt-4 ">
+        <button
+          onClick={onButtonClick}
+          className="w-1/2 m-auto bg-black text-white px-8 py-2 mt-4 "
+        >
           {currentState === "Login" ? "Sign In" : "Sign Up"}
         </button>
       </div>
