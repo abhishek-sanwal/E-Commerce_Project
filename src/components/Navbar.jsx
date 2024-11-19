@@ -8,7 +8,13 @@ import { useShopContext } from "../contexts/ShopContextProvider";
 // 1 means 4px
 function Navbar() {
   const [visibleMenu, setVisibleMenu] = useState(false);
-  const { showSearch, setShowSearch, totalCartItems } = useShopContext();
+  const {
+    setShowSearch,
+    totalCartItems,
+    loggedIn,
+    toggleLoggedStatus,
+    navigate,
+  } = useShopContext();
   const [visible, setVisible] = useState(false);
 
   const location = useLocation();
@@ -16,7 +22,10 @@ function Navbar() {
     function () {
       if (location.pathname.includes("collections")) {
         setVisible(true);
-      } else setVisible(false);
+      } else {
+        setVisible(false);
+        setShowSearch(false);
+      }
     },
     [location]
   );
@@ -73,7 +82,7 @@ function Navbar() {
           className="w-5"
           src={assets.search_icon}
           alt="Search"
-          onClick={() => visible && setShowSearch(!showSearch)}
+          onClick={() => visible && setShowSearch(true)}
         />
 
         {/* Profile with dropdown options below it. */}
@@ -90,17 +99,24 @@ function Navbar() {
               <p role="button" className=" hover:text-black">
                 My Profile
               </p>
-              <p role="button" className=" hover:text-black">
+              <p
+                role="button"
+                className=" hover:text-black"
+                onClick={() => navigate("/orders")}
+              >
                 Orders
               </p>
-              <p role="button" className=" hover:text-black">
-                Logout
+              <p
+                role="button"
+                className=" hover:text-black"
+                onClick={toggleLoggedStatus}
+              >
+                {loggedIn ? "Logout" : "Log In"}
               </p>
             </div>
           </div>
           {/*  */}
         </div>
-        {/*  */}
         <Link to="/cart" className="relative">
           <img className="w-5 min-w-5" src={assets.cart_icon} alt="Cart" />
           <p className="absolute right-[-5px] bottom-[-5px] w-4 text-center leading-4 bg-black text-white aspect-square rounded-full text-[8px]">
