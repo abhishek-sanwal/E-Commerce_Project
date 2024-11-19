@@ -3,17 +3,23 @@ import { createContext, useContext, useEffect, useState } from "react";
 import PropTypes from "prop-types";
 import { products } from "../assets/frontend_assets/assets";
 import { toast } from "react-toastify";
+import { useNavigate } from "react-router-dom";
 
 const shopContext = createContext();
 
 function ShopContextProvider({ children }) {
   const currency = "$";
-  const deliveryFee = "10";
-
+  const deliveryFee = 10;
   const [search, setSearch] = useState("");
-  const [showSearch, setShowSearch] = useState(false);
+  const [showSearch, setShowSearch] = useState(true);
   const [cartItems, setCartItems] = useState({});
+  // total quantity of all cart products
   const [totalCartItems, setTotalCartItems] = useState(0);
+
+  const [orders, setOrders] = useState();
+  const navigate = useNavigate();
+  const [cartData, setCartData] = useState([]);
+  const [loggedIn, setLoggedIn] = useState(true);
 
   //  Add product to cart
   async function addToCart(productId, size) {
@@ -64,6 +70,11 @@ function ShopContextProvider({ children }) {
     setTotalCartItems(value);
   }
 
+  function toggleLoggedStatus() {
+    setLoggedIn(!loggedIn);
+    if (!loggedIn) navigate("/login");
+  }
+
   useEffect(
     function () {
       countTotalProductsInCart();
@@ -71,7 +82,42 @@ function ShopContextProvider({ children }) {
     [cartItems]
   );
 
-  console.log(totalCartItems, cartItems);
+  // Update product quantity
+  function updateQuantity(itemId, itemSize, quantity) {
+    const newCartItems = structuredClone(cartItems);
+
+    // Delete if quantity is zero else set quantity
+    quantity > 0
+      ? (newCartItems[itemId][itemSize] = quantity)
+      : delete newCartItems[itemId][itemSize];
+
+    setCartItems(newCartItems);
+  }
+
+  function getCartAmount() {
+    const totalCartSum = Object.keys(cartItems).reduce((acc, keyId) => {
+      // Sum of all quantity for a particular productID
+      const quantity = Object.values(cartItems[keyId]).reduce(
+        (prev, val) => prev + val,
+        0
+      );
+
+      // Find product price with same product id
+      const pricePerItem = products.find(
+        (product) => product._id === keyId
+      ).price;
+
+      // Multiple and add
+      return acc + quantity * pricePerItem;
+    }, 0);
+
+    return Number(totalCartSum);
+  }
+
+  function addOrder() {
+    setOrders(cartData);
+  }
+
   return (
     <shopContext.Provider
       value={{
@@ -84,7 +130,16 @@ function ShopContextProvider({ children }) {
         setShowSearch,
         cartItems,
         addToCart,
+        navigate,
         totalCartItems,
+        updateQuantity,
+        getCartAmount,
+        addOrder,
+        orders,
+        cartData,
+        setCartData,
+        toggleLoggedStatus,
+        loggedIn,
       }}
     >
       {children}
