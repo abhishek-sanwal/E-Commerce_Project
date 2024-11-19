@@ -7,8 +7,12 @@ import { useState } from "react";
 function PlaceOrder() {
   const [paymentMethod, setPaymentMethod] = useState("cod");
 
-  const { navigate } = useShopContext();
+  const { navigate, addOrder } = useShopContext();
 
+  function handleClick() {
+    addOrder();
+    navigate("/orders");
+  }
   return (
     <div className="flex flex-col sm:flex-row justify-between gap-4 pt-5 sm:pt-14 min-h-[80vh] border-t">
       {/* --------------- Left Side ----------------------- */}
@@ -130,7 +134,7 @@ function PlaceOrder() {
 
           <div className="w-full text-end mt-8">
             <button
-              onClick={() => navigate("/orders")}
+              onClick={handleClick}
               className="bg-black text-white px-16 py-3 text-sm"
             >
               PLACE ORDER

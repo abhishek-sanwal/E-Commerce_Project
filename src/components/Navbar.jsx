@@ -9,6 +9,7 @@ import { useShopContext } from "../contexts/ShopContextProvider";
 function Navbar() {
   const [visibleMenu, setVisibleMenu] = useState(false);
   const {
+    showSearch,
     setShowSearch,
     totalCartItems,
     loggedIn,
@@ -82,7 +83,7 @@ function Navbar() {
           className="w-5"
           src={assets.search_icon}
           alt="Search"
-          onClick={() => visible && setShowSearch(true)}
+          onClick={() => visible && setShowSearch(!showSearch)}
         />
 
         {/* Profile with dropdown options below it. */}

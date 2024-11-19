@@ -12,18 +12,17 @@ function Orders() {
 
   // Get the current date
   const currentDate = formatDate(new Date());
-
   return (
     <div className="pt-16 border-t">
       <div className="mb-3 text-2xl">
-        <Title text1={"MY"} text2={"ORDERS"} />
+        <Title text1={"My"} text2={"Orders"} />
       </div>
 
-      {orders.length === 0 ? (
+      {orders?.length === 0 ? (
         <p className="text-gray-500">You have no orders.</p>
       ) : (
         <div>
-          {orders.map((order, index) => {
+          {orders?.map((order, index) => {
             const productData = products.find(
               (product) => product._id === order._id
             );
