@@ -1,5 +1,5 @@
 import NewsLetter from "../components/NewsLetter";
-import Title from "../Components/Title";
+import Title from "../components/Title";
 import { assets } from "../assets/frontend_assets/assets";
 
 function About() {
@@ -46,21 +46,21 @@ function About() {
       </div>
 
       <div className="flex flex-col md:flex-row mb-20 text-sm gap-4">
-        <div className="border px-10 md:px-16 py-8 sm:py-20 flex flex-col gap-5">
+        <div className="border px-10 md:px-16 py-8 sm:py-20 flex flex-col gap-5 hover:shadow-md">
           <b>Quality Assurance</b>
           <p className="text-gray-600">
             We take pride in offering only the highest quality products that
             meet our stringent standards for durability, performance, and value.{" "}
           </p>
         </div>
-        <div className="border px-10 md:px-16 py-8 sm:py-20 flex flex-col gap-5">
+        <div className="border px-10 md:px-16 py-8 sm:py-20 flex flex-col gap-5 hover:shadow-md">
           <b>Convenience</b>
           <p className="text-gray-600">
             Our user-friendly website and mobile app make it easy to browse,
             compare, and purchase products on the go.{" "}
           </p>
         </div>
-        <div className="border px-10 md:px-16 py-8 sm:py-20 flex flex-col gap-5">
+        <div className="border px-10 md:px-16 py-8 sm:py-20 flex flex-col gap-5 hover:shadow-md">
           <b>Exceptional Customer Services</b>
           <p className="text-gray-600">
             Our dedicated team of customer service representatives is available
