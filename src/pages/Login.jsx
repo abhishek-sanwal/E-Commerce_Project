@@ -5,10 +5,9 @@ import { useShopContext } from "../contexts/ShopContextProvider";
 function Login() {
   const [currentState, setCurrentState] = useState("Sign Up");
 
-  const { loggedIn, navigate } = useShopContext();
+  const { loggedIn, navigate, setLoggedIn } = useShopContext();
   const [remainingTime, setRemainingTime] = useState(5);
 
-  console.log(loggedIn);
   useEffect(
     function () {
       async function getRemainingTime() {
@@ -32,6 +31,7 @@ function Login() {
     if (currentState == "Sign Up") {
       setCurrentState("Login");
     } else {
+      setLoggedIn(true);
       navigate("/");
     }
   }
